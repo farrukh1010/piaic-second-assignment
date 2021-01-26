@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    .person{
+        border: 1px solid gray;
+    }
+
+</style>
+<body>
+    <form action="" onsubmit="added()">
+        <center>
+            <table>  
+          <tr>
+            <td><label for="nam">Name</label></td>
+            <td><input type="text" id="nam"></td>
+        </tr>
+        <tr>
+                <td><label for="nic">CNIC</label></td>
+                <td><input type="text" id="nic"></td>
+      </tr>
+      <tr>
+            <td><label for="hobby">Hobby</label></td>
+            <td><input type="text" id="hobby"></td>
+        </tr>
+        <tr>
+                <td><label for="type">Type</label></td>
+                <td>
+                    <select name="ptype" id="ptype">
+                        <option value="student">Student</option>
+                        <option value="teacher">Teacher</option>
+
+                </select></td>
+            </tr>
+            <td>   </td><td><button>Submit</button></td>
+        </table>
+    </center>
+
+    
+     </form>
+     <center>
+         <tr>
+        <td><button onclick="shows()">Show student</button></td>
+        <td> <button onclick="showt()">Show teacher</button></td>
+        </tr>
+     </center>
+ <div id="stu"><h1>students</h1></div>
+ <div id="tea"><h1>Teachers</h1></div>
+</body>
+<script>
+    
+    class Person{
+        constructor(){
+            this.name='mubashar',
+            this.nic= "spourt",
+            this.hobby="33102879458954",
+            this.type="someone"
+        }
+    }
+
+    class Student extends Person{
+       
+    }
+    class Teacher extends Person{
+        
+    }
+
+
+var  log=[];
+  function   added(){
+
+      event.preventDefault();
+         if(ptype.value=='student'){
+            let student =new Student();
+            student.type=student.constructor.name;
+            student.name=document.getElementById('nam').value;
+            student.NIC=document.getElementById('nic').value;
+            student.hobby=document.getElementById('hobby').value;
+                log.push(student);
+         }else{
+            let teacher =new Teacher();
+            teacher.type=teacher.constructor.name;
+
+                teacher.name=document.getElementById('nam').value;
+                teacher.nic=document.getElementById('nic').value;
+                teacher.hobby=document.getElementById('hobby').value;
+                log.push(teacher);
+
+
+         }
+              console.log("added Person")
+           
+         localStorage.setItem("persondata", JSON.stringify(log));
+
+     }
+    
+     let teachers=[];
+
+     let students=[];
+
+     function shows(){
+         stu.innerHTML="";
+        students=log.filter(function(item){
+                if(item.type=='Student'){
+                    return true;
+                }else{
+                    teachers.push(item);
+                    return false;
+                    
+                }
+            });
+            students.forEach((item)=>{
+                stu.innerHTML += '<div class="person"> <b> Name : </b>'+item.name+ '<br/>  <b> NIC : </b>'+item.nic+ '\<br/>  <b> hobby : </b>'+ item.hobby+'</div>';
+            });
+     }
+
+     function showt(){
+         tea.innerHTML= "";
+         teachers=log.filter(function(item){
+                if(item.type=='Teacher'){
+                    return true;
+                }else{
+                    teachers.push(item);
+                    return false;
+                    
+                }
+            });
+        teachers.forEach((item)=>{
+                tea.innerHTML += '<div class="person"> <b> Name : </b>'+item.name+ '<br/>  <b> NIC : </b>'+item.nic+ '\<br/>  <b> hobby : </b>'+ item.hobby+'</div>';
+            });
+     }
+
+
+
+
+
+
+
+
+
+    // class Person{
+    //     constructor(){
+    //         this.name='mubashar',
+    //         this.hoby= "spourt",
+    //         this.nic="33102879458954"
+    //     }
+    // }
+
+    // class Teacher extends Person{
+
+    // }
+   
+
+
+</script>
+    
+</html>
